@@ -4,14 +4,14 @@ uid: Overview.Mvux.FeedView
 
 # The `FeedView` control
 
-The `FeedView` control is one of the main ways to consume Feeds and States within an application. The `FeedView` uses different visual states to control what is displayed on the screen depending on the state of the underlying feed, or state. 
+The `FeedView` control is one of the main ways to consume Feeds and States within an application. The `FeedView` uses different visual states to control what is displayed on the screen depending on the state of the underlying feed, or state.
 
 ## How to use the `FeedView` control
 
 To use the `FeedView` you have to add the Uno.Extensions.Reactive.UI namespace to your XAML file as follows:
 
 ```xml
-<Page 
+<Page
     x:Class="MyMvuxApp.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -55,7 +55,7 @@ In the above example, [`Data`](#data) is a property of the `FeedViewState` insta
 
 ### State
 
-The `State` property returns a `FeedViewState` which exposes the current state of the `FeedView`'s underlying data Feed. It's unlikely that you'll need to access the `State` property directly since the `FeedViewState` is automatically set as the `DataContext` of the various templates.  
+The `State` property returns a `FeedViewState` which exposes the current state of the `FeedView`'s underlying data Feed. It's unlikely that you'll need to access the `State` property directly since the `FeedViewState` is automatically set as the `DataContext` of the various templates.
 
 #### The `FeedViewState` object
 
@@ -137,10 +137,10 @@ This property accepts a value of the `FeedViewRefreshState` enumeration, which s
 
 ### ValueTemplate (default Template)
 
-The `ValueTemplate` defines how the `FeedView` would be rendered when its state has concrete data to display, as opposed to no data while loading.  
+The `ValueTemplate` defines how the `FeedView` would be rendered when its state has concrete data to display, as opposed to no data while loading.
 As mentioned previously, the `FeedView` provides the `FeedViewState` as the data item for its `ValueTemplate`.
 
-The `FeedView`'s default content directs to this property, so anything directly added to the `FeedView` element's XAML, is like setting its `ValueTemplate`.  
+The `FeedView`'s default content directs to this property, so anything directly added to the `FeedView` element's XAML, is like setting its `ValueTemplate`.
 
 So
 
@@ -183,15 +183,17 @@ But you can customize that by overriding the `ProgressTemplate`:
     </DataTemplate>
 
     <ProgressTemplate>
-        <TextBlock Text="Please wait while requesting data..." />
+        <DataTemplate>
+            <TextBlock Text="Please wait while requesting data..." />
+        </DataTemplate>
     </ProgressTemplate>
 </FeedView>
 ```
 
 ### NoneTemplate
 
-If you set a template to this property, it will show if the data that was returned from the service contained no entries.  
-For instance, if an `IFeed<T>` completed its request successfully with the server returning a `null` result, it is not considered an `Error`, it's considered a successful result with no data.  
+If you set a template to this property, it will show if the data that was returned from the service contained no entries.
+For instance, if an `IFeed<T>` completed its request successfully with the server returning a `null` result, it is not considered an `Error`, it's considered a successful result with no data.
 Similarly, when using `IListFeed<T>`, the `NoneTemplate` will also display if the collection is empty, as well as if the result is `null`.
 
 Example:
@@ -203,7 +205,9 @@ Example:
     </DataTemplate>
 
     <NoneTemplate>
-        <TextBlock Text="No results were found based on your search criteria" />
+        <DataTemplate>
+            <TextBlock Text="No results were found based on your search criteria" />
+        </DataTemplate>
     </NoneTemplate>
 </FeedView>
 ```
@@ -214,8 +218,8 @@ The `FeedView` will display this template if an Exception was thrown by the unde
 
 ### UndefinedTemplate
 
-This template is displayed when the control loads, before the underlying asynchronous operation has even been called.  
-As soon as the asynchronous operation is invoked and awaited, the `FeedView` will switch to its `ProgressTemplate`, until the operation has resulted in data, which it will then switch to the `ValueTemplate`, or `NoneTemplate`, depending on the data result.  
+This template is displayed when the control loads, before the underlying asynchronous operation has even been called.
+As soon as the asynchronous operation is invoked and awaited, the `FeedView` will switch to its `ProgressTemplate`, until the operation has resulted in data, which it will then switch to the `ValueTemplate`, or `NoneTemplate`, depending on the data result.
 
 Typically this template will only show for a very short period - a split second or so, depending on how long it takes for the page and its Model to load.
 
