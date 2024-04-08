@@ -227,7 +227,7 @@ The `MainModel` (as distinct from the `MainViewModel` used in the MVVM example) 
 				<DataTemplate>
 					<TextBlock>
 						<Run Text="Current temperature: " />
-						<Run Text="{Binding Data.Temperature}" />
+						<Run Text="{Binding CurrentWeather.Temperature}" />
 					</TextBlock>
 				</DataTemplate>
 			</mvux:FeedView.ValueTemplate>
