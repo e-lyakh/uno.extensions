@@ -49,7 +49,7 @@ The `ObservableObject` comes from the [`CommunityToolkit.Mvvm`](https://www.nuge
 				VerticalAlignment="Center">
         <TextBlock>
             <Run Text="Current temperature: " />
-            <Run Text="{Binding Data.Temperature}" />
+            <Run Text="{Binding CurrentWeather.Temperature}" />
         </TextBlock>
 	</StackPanel>
 </Page>
